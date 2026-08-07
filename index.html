@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Planning Comparator — Star Garments</title>
+<link rel="icon" href="assets/logo.png">
+<link rel="stylesheet" href="css/styles.css">
+
+<!-- PDF.js: parses the FastReact PDF using real text coordinates -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+
+<!-- SheetJS: Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<!-- jsPDF + autotable: PDF report export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+  #boot-screen{
+    position:fixed; inset:0; z-index:9999;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px;
+    background:linear-gradient(160deg,#123047 0%, #1E6690 100%);
+    font-family:'Inter',sans-serif; color:#EAF2F6;
+    transition:opacity .5s ease, visibility .5s ease;
+  }
+  #boot-screen.hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+  #boot-screen img{ width:150px; filter:drop-shadow(0 8px 24px rgba(0,0,0,.25)); animation:boot-pop .6s ease; }
+  #boot-screen .boot-title{ font-family:'Zilla Slab',serif; font-weight:700; font-size:19px; letter-spacing:.3px; }
+  #boot-screen .boot-sub{ font-size:12.5px; color:#B9CEDA; letter-spacing:.3px; }
+  #boot-spinner{
+    width:34px; height:34px; border-radius:50%;
+    border:3px solid rgba(255,255,255,.25); border-top-color:#D9515D;
+    animation:boot-spin .85s linear infinite;
+  }
+  @keyframes boot-spin{ to{ transform:rotate(360deg); } }
+  @keyframes boot-pop{ from{ opacity:0; transform:scale(.85); } to{ opacity:1; transform:scale(1); } }
+  #boot-error{
+    display:none; max-width:520px; background:rgba(0,0,0,.25); border:1px solid rgba(226,123,132,.5);
+    border-radius:10px; padding:16px 18px; font-size:12.5px; color:#F6D8DA; text-align:left; white-space:pre-wrap;
+  }
+</style>
+</head>
+<body>
+  <div id="boot-screen">
+    <img src="assets/logo.png" alt="Star Garments">
+    <div id="boot-spinner"></div>
+    <div class="boot-title">Weekly Planning Comparator</div>
+    <div class="boot-sub" id="boot-status">Starting up…</div>
+    <div id="boot-error"></div>
+  </div>
+  <div id="app-root"></div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
